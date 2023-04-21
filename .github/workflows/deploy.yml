@@ -11,19 +11,26 @@ jobs:
   test:
     environment: testing
     runs-on: ubuntu-latest
-    container:
-      image: node:16
+    # container:
+    #   image: node:16
     env:
-      # If job runs in a container.
+      # If job doesn't run in a container.
       MONGODB_CONNECTION_PROTOCOL: mongodb
-      # If job runs in a container.
-      MONGODB_CLUSTER_ADDRESS: mongodb
+      # If job doesn't run in a container.
+      MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017
+      # # If job runs in a container.
+      # MONGODB_CONNECTION_PROTOCOL: mongodb
+      # # If job runs in a container.
+      # MONGODB_CLUSTER_ADDRESS: mongodb
       MONGODB_USERNAME: root
       MONGODB_PASSWORD: example
       PORT: 8080
     services:
       mongodb:
         image: mongo
+        # If job doesn't run in a container.
+        ports:
+          - 27017:27017
         env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
